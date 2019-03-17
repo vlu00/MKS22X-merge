@@ -3,43 +3,49 @@ import java.util.*;
 
 public class Merge {
 
-  public static int[] createArray(int[] data, int lo, int hi) {
-    int[] L = new int[hi-lo+1];
-    int i = 0;
-    while (hi >= lo) {
-      L[i] = data[lo];
-      i++;
-      lo++;
-    }
-    return L;
-  }
-
   public static void merge(int[] data, int lo, int divide, int hi) {
-    int[] a = createArray(data, lo, divide);
-    int[] b = createArray(data, divide+1, hi);
+    int j = lo;
+    int k = divide+1;
+    int i = 0;
+
+    int[] a = new int[divide-lo+1];
+    while (j < divide+1) {
+      a[i] = data[j];
+      i++;
+      j++;
+    }
+
+    i = 0;
+    int[] b = new int [hi-divide];
+    while (k < hi+1) {
+      b[i] = data[k];
+      i++;
+      k++;
+    }
+    //System.out.println(Arrays.toString(a));
+    //System.out.println(Arrays.toString(b));
 
     //sorting
     int indexA = 0;
     int indexB = 0;
-    int i = 0;
-    while (i < a.length+b.length) {
+    while (lo < a.length+b.length) {
       if (indexA == a.length) {
-        data[lo+i] = b[indexB];
+        data[lo] = b[indexB];
         indexB++;
       }
       else if (indexB == b.length) {
-        data[lo+i] = a[indexA];
+        data[lo] = a[indexA];
         indexA++;
       }
       else if (a[indexA] < b[indexB]) {
-        data[lo+i] = a[indexA];
+        data[lo] = a[indexA];
         indexA++;
       }
       else {
-        data[lo+i] = b[indexB];
+        data[lo] = b[indexB];
         indexB++;
       }
-      i++;
+      lo++;
     }
   }
 
@@ -51,17 +57,19 @@ public class Merge {
     if (lo >= hi) {
       return;
     }
-    mergesort(data, lo, lo+hi/2);
-    mergesort(data, lo+hi/2+1, hi);
-    merge(data, lo, lo+hi/2, hi);
+    int divide = (lo+hi)/2;
+    mergesort(data, lo, divide);
+    mergesort(data, divide+1, hi);
+    merge(data, lo, divide, hi);
   }
 
   public static void main(String[] args) {
-    int[] A = new int[] {0, 3, 5, 6, 7, 8};
-    int[] B = new int[] {5, 6};
+    //int[] A = new int[] {0, 3, 5, 6, 7, 8};
+    int[] B = new int[] {5, 8, 0, 1, 3, 6};
 
-    mergesort(A);
-    System.out.println(Arrays.toString(A));
-    //System.out.println(Arrays.toString(merge(B, A)));
+    mergesort(B);
+    System.out.println(Arrays.toString(B));
+    //merge(A, 0, 2, 5);
+    //System.out.println(A);
   }
 }
