@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.io.*;
 import java.util.*;
 
@@ -7,8 +6,9 @@ public class Merge {
   public static int[] createArray(int[] data, int lo, int hi) {
     int[] L = new int[hi-lo+1];
     int i = 0;
-    while (hi > lo) {
+    while (hi >= lo) {
       L[i] = data[lo];
+      i++;
       lo++;
     }
     return L;
@@ -62,8 +62,10 @@ public class Merge {
     int[] A = new int[] {5, 8, 3, 0, 7, 6};
     int[] B = new int[] {5, 6};
 
-    mergesort(A);
-    System.out.println(Arrays.toString(A));
+    //mergesort(A);
+    System.out.println(Arrays.toString(createArray(A, 0, 2)));
+    System.out.println(Arrays.toString(createArray(A, 3, 5)));
+
     //System.out.println(Arrays.toString(merge(B, A)));
   }
 }
