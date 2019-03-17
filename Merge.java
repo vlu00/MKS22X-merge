@@ -14,7 +14,7 @@ public class Merge {
     return L;
   }
 
-  public static int[] merge(int[] data, int lo, int divide, int hi) {
+  public static void merge(int[] data, int lo, int divide, int hi) {
     int[] a = createArray(data, lo, divide);
     int[] b = createArray(data, divide+1, hi);
 
@@ -22,27 +22,25 @@ public class Merge {
     int indexA = 0;
     int indexB = 0;
     int i = 0;
-    int[] complete = new int[(a.length+b.length)];
     while (i < a.length+b.length) {
       if (indexA == a.length) {
-        complete[i] = b[indexB];
+        data[lo+i] = b[indexB];
         indexB++;
       }
       else if (indexB == b.length) {
-        complete[i] = a[indexA];
+        data[lo+i] = a[indexA];
         indexA++;
       }
       else if (a[indexA] < b[indexB]) {
-        complete[i] = a[indexA];
+        data[lo+i] = a[indexA];
         indexA++;
       }
       else {
-        complete[i] = b[indexB];
+        data[lo+i] = b[indexB];
         indexB++;
       }
       i++;
     }
-    return complete;
   }
 
   public static void mergesort(int[]data){
@@ -59,13 +57,11 @@ public class Merge {
   }
 
   public static void main(String[] args) {
-    int[] A = new int[] {5, 8, 3, 0, 7, 6};
+    int[] A = new int[] {0, 3, 5, 6, 7, 8};
     int[] B = new int[] {5, 6};
 
-    //mergesort(A);
-    System.out.println(Arrays.toString(createArray(A, 0, 2)));
-    System.out.println(Arrays.toString(createArray(A, 3, 5)));
-
+    mergesort(A);
+    System.out.println(Arrays.toString(A));
     //System.out.println(Arrays.toString(merge(B, A)));
   }
 }
