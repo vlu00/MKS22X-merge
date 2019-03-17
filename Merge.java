@@ -9,8 +9,15 @@ public class Merge {
     int i = 0;
     int[] complete = new int[(a.length+b.length)];
     while (i < a.length+b.length) {
-      //if (a.length)
-      if (a[indexA] < b[indexB]) {
+      if (indexA == a.length) {
+        complete[i] = b[indexB];
+        indexB++;
+      }
+      else if (indexB == b.length) {
+        complete[i] = a[indexA];
+        indexA++;
+      }
+      else if (a[indexA] < b[indexB]) {
         complete[i] = a[indexA];
         indexA++;
       }
@@ -19,17 +26,16 @@ public class Merge {
         indexB++;
       }
       i++;
+      System.out.println(Arrays.toString(complete));
     }
     return complete;
   }
 
   public static void main(String[] args) {
-    int[] A = new int[] {3};
-    int[] B = new int[] {5};
+    int[] A = new int[] {3, 8, 7};
+    int[] B = new int[] {5, 6};
 
-    //int[] test1 = merge(A, B);
     System.out.println(Arrays.toString(merge(A, B)));
-    //int[] test2 = merge(B, A);
-    System.out.println(Arrays.toString(merge(B, A)));
+    //System.out.println(Arrays.toString(merge(B, A)));
   }
 }
