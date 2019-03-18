@@ -4,6 +4,9 @@ import java.util.*;
 public class Merge {
 
   public static void merge(int[] data, int lo, int divide, int hi) {
+    System.out.println(Arrays.toString(data));
+    System.out.println("lo " + lo + " d " + divide + " hi " + hi);
+
     int j = lo;
     int k = divide+1;
     int i = 0;
@@ -22,13 +25,17 @@ public class Merge {
       i++;
       k++;
     }
-    //System.out.println(Arrays.toString(a));
-    //System.out.println(Arrays.toString(b));
+    //System.out.println("a " + Arrays.toString(a));
+    //System.out.println("b" + Arrays.toString(b));
 
     //sorting
     int indexA = 0;
     int indexB = 0;
-    while (lo < a.length+b.length) {
+    int h = 0;
+    while (h < a.length+b.length) {
+      //System.out.println(lo);
+      //System.out.println(indexA);
+      //System.out.println(indexB);
       if (indexA == a.length) {
         data[lo] = b[indexB];
         indexB++;
@@ -46,6 +53,7 @@ public class Merge {
         indexB++;
       }
       lo++;
+      h++;
     }
   }
 
@@ -65,8 +73,10 @@ public class Merge {
 
   public static void main(String[] args) {
     //int[] A = new int[] {0, 3, 5, 6, 7, 8};
-    int[] B = new int[] {5, 8, 0, 1, 3, 6};
-
+    int[] B = new int[100];
+    for (int i = 0; i < 100; i++) {
+      B[i] = 100-i;
+    }
     mergesort(B);
     System.out.println(Arrays.toString(B));
     //merge(A, 0, 2, 5);
