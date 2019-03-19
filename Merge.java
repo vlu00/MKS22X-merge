@@ -4,39 +4,24 @@ import java.util.*;
 public class Merge {
 
   public static void merge(int[] data, int lo, int divide, int hi) {
-    int j = lo;
-    int k = divide+1;
-    int i = 0;
 
     int[] a = new int[divide-lo+1];
-    while (j < divide+1) {
-      a[i] = data[j];
-      i++;
-      j++;
+    for (int j = 0; j < divide-lo+1; j++) {
+      a[j] = data[lo+j];
     }
 
-    i = 0;
     int[] b = new int [hi-divide];
-    while (k < hi+1) {
-      b[i] = data[k];
-      i++;
-      k++;
+    for (int k = 0; k < hi-divide; k++) {
+      b[k] = data[divide+k+1];
     }
 
     //sorting
     int indexA = 0;
     int indexB = 0;
-    int h = 0;
-    while (h < a.length+b.length) {
-      if (indexA == a.length) {
-        data[lo] = b[indexB];
-        indexB++;
-      }
-      else if (indexB == b.length) {
-        data[lo] = a[indexA];
-        indexA++;
-      }
-      else if (a[indexA] < b[indexB]) {
+    //sorts until one or both list(s) becomes empty
+    while (indexA < a.length && indexB < b.length) {
+
+      if (a[indexA] < b[indexB]) {
         data[lo] = a[indexA];
         indexA++;
       }
@@ -45,7 +30,17 @@ public class Merge {
         indexB++;
       }
       lo++;
-      h++;
+    }
+    //if one list is empty, fill in data with the other
+    while (indexB < b.length) {
+      data[lo] = b[indexB];
+      indexB++;
+      lo++;
+    }
+    while (indexA < a.length) {
+      data[lo] = a[indexA];
+      indexA++;
+      lo++;
     }
   }
 
