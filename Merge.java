@@ -3,6 +3,47 @@ import java.util.*;
 
 public class Merge {
 
+  public static int[] createArray(int[] data, int lo, int hi) {
+    int[] L = new int[hi-lo+1];
+    int i = 0;
+    while (hi >= lo) {
+      L[i] = data[lo];
+      i++;
+      lo++;
+    }
+    return L;
+  }
+
+  public static void merge(int[] data, int[] temp, int lo, int divide, int hi) {
+    int indexA = 0;
+    int indexB = 0;
+    int counter = 0;
+    int index = lo;
+    while (counter <= hi-lo) {
+      //System.out.println("data: " + Arrays.toString(data));
+      //System.out.println("temp: " + Arrays.toString(temp));
+
+      if (indexA > divide-lo) {
+        data[index] = temp[divide+indexB+1];
+        indexB++;
+      }
+      else if (indexB >= hi - divide) {
+        data[index] = temp[lo+indexA];
+        indexA++;
+      }
+      else if (data[lo+indexA] < temp[divide+indexB+1]) {
+        data[index] = temp[lo + indexA];
+        indexA++;
+      }
+      else {
+        data[index] = temp[divide+indexB+1];
+        indexB++;
+      }
+      index++;
+      counter++;
+    }
+  }
+/*
   public static void merge(int[] data, int lo, int divide, int hi) {
     int j = lo;
     int k = divide+1;
@@ -48,21 +89,22 @@ public class Merge {
       h++;
     }
   }
-
+*/
   public static void mergesort(int[]data){
-    mergesort(data, 0, data.length-1);
+    int[] temp = createArray(data, 0, data.length-1);
+    mergesort(data, temp, 0, data.length-1);
   }
 
-  public static void mergesort(int[]data, int lo, int hi){
+  public static void mergesort(int[]data, int[] temp, int lo, int hi){
     if (lo >= hi) {
       return;
     }
     int divide = (lo+hi)/2;
-    mergesort(data, lo, divide);
-    mergesort(data, divide+1, hi);
-    merge(data, lo, divide, hi);
+    mergesort(temp, data, lo, divide);
+    mergesort(data, temp, divide+1, hi);
+    merge(data, temp, lo, divide, hi);
   }
-
+/*
   public static void main(String[]args){
     System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
     int[]MAX_LIST = {1000000000,10};
@@ -97,18 +139,16 @@ public class Merge {
       System.out.println();
     }
   }
-
-/*
+*/
   public static void main(String[] args) {
-    //int[] A = new int[] {0, 3, 5, 6, 7, 8};
-    int[] B = new int[100];
-    for (int i = 0; i < 100; i++) {
-      B[i] = 100-i;
-    }
-    mergesort(B);
-    System.out.println(Arrays.toString(B));
+    int[] A = new int[] {5, 4, 3, 2, 1};
+    //int[] B = new int[100];
+    //for (int i = 0; i < 100; i++) {
+    //  B[i] = 100-i;
+    //}
+    mergesort(A);
+    System.out.println(Arrays.toString(A));
     //merge(A, 0, 2, 5);
     //System.out.println(A);
   }
-  */
 }
