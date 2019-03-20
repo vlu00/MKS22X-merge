@@ -3,6 +3,22 @@ import java.util.*;
 
 public class Merge {
 
+  public static void insertionsort(int[] data, int lo, int hi) {
+    if (hi-lo+1 > 1) { //if length is 0 or 1, data remains the same
+      int counter = lo;
+      while (counter < hi) {
+        int x = data[counter+1];
+        int index = counter+1;
+        for (int n = counter+1; n != lo && data[n-1] > x; n--) {
+          data[n] = data[n-1];
+          index--;
+        }
+        data[index] = x;
+        counter++;
+      }
+    }
+  }
+    /*
   public static int[] createArray(int[] data, int lo, int hi) {
     int[] L = new int[hi-lo+1];
     int i = 0;
@@ -43,7 +59,7 @@ public class Merge {
       counter++;
     }
   }
-/*
+*/
   public static void merge(int[] data, int lo, int divide, int hi) {
     int j = lo;
     int k = divide+1;
@@ -89,10 +105,11 @@ public class Merge {
       h++;
     }
   }
-*/
+
   public static void mergesort(int[]data){
-    int[] temp = createArray(data, 0, data.length-1);
-    mergesort(data, temp, 0, data.length-1);
+    //int[] temp = createArray(data, 0, data.length-1);
+    //mergesort(data, temp, 0, data.length-1);
+    mergesort(data, 0, data.length-1);
   }
 
   public static void mergesort(int[]data, int[] temp, int lo, int hi){
@@ -100,9 +117,14 @@ public class Merge {
       return;
     }
     int divide = (lo+hi)/2;
+    mergesort(data, lo, divide);
+    mergesort(data, divide+1, hi);
+    merge(data, lo, divide, hi);
+    /*
     mergesort(temp, data, lo, divide);
     mergesort(data, temp, divide+1, hi);
     merge(data, temp, lo, divide, hi);
+    */
   }
 /*
   public static void main(String[]args){
