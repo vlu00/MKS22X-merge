@@ -112,7 +112,7 @@ public class Merge {
     mergesort(data, 0, data.length-1);
   }
 
-  public static void mergesort(int[]data, int[] temp, int lo, int hi){
+  public static void mergesort(int[]data, int lo, int hi){
     if (lo >= hi) {
       return;
     }
