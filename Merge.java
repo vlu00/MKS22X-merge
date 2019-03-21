@@ -62,14 +62,7 @@ public class Merge {
       counter++;
     }
     System.out.println("adata " + Arrays.toString(data));
-
-    for (int i = 0; i < data.length; i++) {
-      //System.out.println(data[i]);
-        temp[i] = data[i];
-     }
-
-     System.out.println("atemp " + Arrays.toString(temp));
-
+    System.out.println("atemp " + Arrays.toString(temp));
   }
 
   public static void mergesort(int[]data){
@@ -89,13 +82,13 @@ public class Merge {
     merge(data, lo, divide, hi);
     */
     mergesort(temp, data, lo, divide);
-    mergesort(data, temp, divide+1, hi);
+    mergesort(temp, data, divide+1, hi);
     merge(data, temp, lo, divide, hi);
 
   }
 
   public static void main(String[] args) {
-    int[] A = new int[] {5, 4, 3, 2, 1};
+    int[] A = new int[] {6, 5, 4, 3, 2, 1};
     //int[] B = new int[100];
     //for (int i = 0; i < 100; i++) {
     //  B[i] = 100-i;
@@ -141,7 +134,7 @@ public class Merge {
       System.out.println();
     }
   }
-  */
+*/
 }
 /*
 public static void merge(int[] data, int lo, int divide, int hi) {
