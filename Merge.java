@@ -50,7 +50,7 @@ public class Merge {
         data[index] = temp[lo+indexA];
         indexA++;
       }
-      else if (data[lo+indexA] < temp[divide+indexB+1]) {
+      else if (temp[lo+indexA] < temp[divide+indexB+1]) {
         data[index] = temp[lo + indexA];
         indexA++;
       }
@@ -93,6 +93,19 @@ public class Merge {
     merge(data, temp, lo, divide, hi);
 
   }
+
+  public static void main(String[] args) {
+    int[] A = new int[] {5, 4, 3, 2, 1};
+    //int[] B = new int[100];
+    //for (int i = 0; i < 100; i++) {
+    //  B[i] = 100-i;
+    //}
+    mergesort(A);
+    System.out.println(Arrays.toString(A));
+    //merge(A, 0, 2, 5);
+    //System.out.println(A);
+  }
+
 /*
   public static void main(String[]args){
     System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
@@ -128,18 +141,7 @@ public class Merge {
       System.out.println();
     }
   }
-*/
-  public static void main(String[] args) {
-    int[] A = new int[] {4, 3, 2, 1};
-    //int[] B = new int[100];
-    //for (int i = 0; i < 100; i++) {
-    //  B[i] = 100-i;
-    //}
-    mergesort(A);
-    System.out.println(Arrays.toString(A));
-    //merge(A, 0, 2, 5);
-    //System.out.println(A);
-  }
+  */
 }
 /*
 public static void merge(int[] data, int lo, int divide, int hi) {
@@ -186,5 +188,17 @@ public static void merge(int[] data, int lo, int divide, int hi) {
     lo++;
     h++;
   }
+}
+
+public static void main(String[] args) {
+  int[] A = new int[] {4, 3, 2, 1};
+  //int[] B = new int[100];
+  //for (int i = 0; i < 100; i++) {
+  //  B[i] = 100-i;
+  //}
+  mergesort(A);
+  System.out.println(Arrays.toString(A));
+  //merge(A, 0, 2, 5);
+  //System.out.println(A);
 }
 */
