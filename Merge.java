@@ -18,7 +18,7 @@ public class Merge {
       }
     }
   }
-    /*
+
   public static int[] createArray(int[] data, int lo, int hi) {
     int[] L = new int[hi-lo+1];
     int i = 0;
@@ -31,6 +31,9 @@ public class Merge {
   }
 
   public static void merge(int[] data, int[] temp, int lo, int divide, int hi) {
+    System.out.println("temp " + Arrays.toString(temp));
+    System.out.println("data " + Arrays.toString(data));
+
     int indexA = 0;
     int indexB = 0;
     int counter = 0;
@@ -58,73 +61,37 @@ public class Merge {
       index++;
       counter++;
     }
-  }
-*/
-  public static void merge(int[] data, int lo, int divide, int hi) {
-    int j = lo;
-    int k = divide+1;
-    int i = 0;
+    System.out.println("adata " + Arrays.toString(data));
 
-    int[] a = new int[divide-lo+1];
-    while (j < divide+1) {
-      a[i] = data[j];
-      i++;
-      j++;
-    }
+    for (int i = 0; i < data.length; i++) {
+      //System.out.println(data[i]);
+        temp[i] = data[i];
+     }
 
-    i = 0;
-    int[] b = new int [hi-divide];
-    while (k < hi+1) {
-      b[i] = data[k];
-      i++;
-      k++;
-    }
+     System.out.println("atemp " + Arrays.toString(temp));
 
-    //sorting
-    int indexA = 0;
-    int indexB = 0;
-    int h = 0;
-    while (h < a.length+b.length) {
-      if (indexA == a.length) {
-        data[lo] = b[indexB];
-        indexB++;
-      }
-      else if (indexB == b.length) {
-        data[lo] = a[indexA];
-        indexA++;
-      }
-      else if (a[indexA] < b[indexB]) {
-        data[lo] = a[indexA];
-        indexA++;
-      }
-      else {
-        data[lo] = b[indexB];
-        indexB++;
-      }
-      lo++;
-      h++;
-    }
   }
 
   public static void mergesort(int[]data){
-    //int[] temp = createArray(data, 0, data.length-1);
-    //mergesort(data, temp, 0, data.length-1);
-    mergesort(data, 0, data.length-1);
+    int[] temp = createArray(data, 0, data.length-1);
+    mergesort(data, temp, 0, data.length-1);
+    //mergesort(data, 0, data.length-1);
   }
 
-  public static void mergesort(int[]data, int lo, int hi){
+  public static void mergesort(int[]data, int[]temp, int lo, int hi){
     if (lo >= hi) {
       return;
     }
     int divide = (lo+hi)/2;
+    /*
     mergesort(data, lo, divide);
     mergesort(data, divide+1, hi);
     merge(data, lo, divide, hi);
-    /*
+    */
     mergesort(temp, data, lo, divide);
     mergesort(data, temp, divide+1, hi);
     merge(data, temp, lo, divide, hi);
-    */
+
   }
 /*
   public static void main(String[]args){
@@ -163,7 +130,7 @@ public class Merge {
   }
 */
   public static void main(String[] args) {
-    int[] A = new int[] {5, 4, 3, 2, 1};
+    int[] A = new int[] {4, 3, 2, 1};
     //int[] B = new int[100];
     //for (int i = 0; i < 100; i++) {
     //  B[i] = 100-i;
@@ -174,3 +141,50 @@ public class Merge {
     //System.out.println(A);
   }
 }
+/*
+public static void merge(int[] data, int lo, int divide, int hi) {
+  int j = lo;
+  int k = divide+1;
+  int i = 0;
+
+  int[] a = new int[divide-lo+1];
+  while (j < divide+1) {
+    a[i] = data[j];
+    i++;
+    j++;
+  }
+
+  i = 0;
+  int[] b = new int [hi-divide];
+  while (k < hi+1) {
+    b[i] = data[k];
+    i++;
+    k++;
+  }
+
+  //sorting
+  int indexA = 0;
+  int indexB = 0;
+  int h = 0;
+  while (h < a.length+b.length) {
+    if (indexA == a.length) {
+      data[lo] = b[indexB];
+      indexB++;
+    }
+    else if (indexB == b.length) {
+      data[lo] = a[indexA];
+      indexA++;
+    }
+    else if (a[indexA] < b[indexB]) {
+      data[lo] = a[indexA];
+      indexA++;
+    }
+    else {
+      data[lo] = b[indexB];
+      indexB++;
+    }
+    lo++;
+    h++;
+  }
+}
+*/
